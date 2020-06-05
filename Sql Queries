@@ -1,0 +1,715 @@
+1.How to create a TABLE?
+
+@Query:
+
+	CREATE TABLE EMPLOYEE(
+		EMPLOYEE_ID NUMBER,
+		EMPLOYEE_NAME VARCHAR2(20),
+		EMP_SAL NUMBER,
+		EMP_EMAIL VARCHAR2(50),
+		EMP_DESIGNATION VARCHAR2(30),
+		PRIMARY KEY(EMPLOYEE_ID)
+    );
+	
+@Result:
+	Table EMPLOYEE created.
+____________________________________________________________________________________________________________________________
+
+2.How to Insert Values into Table?
+
+@Query:
+	
+	INSERT INTO EMPLOYEE VALUES(101,'Mahi',45000,'mahi@gmail.com','Developer');
+    INSERT INTO EMPLOYEE VALUES(102,'Sri',25000,'sri@gmail.com','Tester');
+    INSERT INTO EMPLOYEE VALUES(103,'Ram',28000,'ram@gmail.com','System Engineer');
+    INSERT INTO EMPLOYEE VALUES(104,'Venkat',36000,'venkat@gmail.com','Senior System Engineer');
+    INSERT INTO EMPLOYEE VALUES(105,'Anju',45000,'anju@gmail.com','Team Lead');
+	    .
+		.
+		.
+		.
+		.ETC...
+
+@Result:
+    1 row inserted.
+	1 row inserted.
+	1 row inserted.
+	1 row inserted.
+	    .
+		.
+		.ETC..
+______________________________________________________________________________________________________________________
+
+3.How to Get all the details from employee Table?
+
+@Query:
+	
+	SELECT * FROM EMPLOYEE;
+	
+@Result:
+	EMPLOYEE_ID   EMPLOYEE_NAME  EMP_SAL	EMP_EMAIL 		   EMP_DESIGNATION
+	101	              Mahi	      45000 	mahi@gmail.com		Developer
+    102	              Sri	      25000	    sri@gmail.com		Tester
+    103	              Ram	      28000		ram@gmail.com		System Engineer
+    104	             Venkat       36000		venkat@gmail.com	Senior System Engineer
+    105         	  Anju	      45000		anju@gmail.com		Team Lead
+
+                 .
+				 .
+				 .
+				 .
+				 .ETC.......
+________________________________________________________________________________________________________________________________
+
+4.How to get employee details based on emailId?
+
+@Query:
+	
+	SELECT * FROM EMPLOYEE WHERE EMP_EMAIL='mahi@gmail';
+	
+@Result:
+	
+	EMPLOYEE_ID   EMPLOYEE_NAME  EMP_SAL	EMP_EMAIL 		   EMP_DESIGNATION
+	101	              Mahi	      45000 	mahi@gmail.com		Developer
+
+_________________________________________________________________________________________________________________________________
+
+5.How to get employee details based on EMPLOYEE_ID?
+
+@Query:
+	
+	SELECT * FROM EMPLOYEE WHERE EMPLOYEE_ID=102;
+	
+@Result:
+	
+	EMPLOYEE_ID   EMPLOYEE_NAME  EMP_SAL	EMP_EMAIL 		   EMP_DESIGNATION
+
+    102	              Sri	      25000	    sri@gmail.com		Tester
+
+____________________________________________________________________________________________________________________________
+SELECTING INDIVIDUAL COLUMNS:
+
+6.How to get EMPLOYEE_NAME AND EMP_DESIGNATION based on EMP_SAL?
+
+@Query:
+
+	SELECT EMPLOYEE_NAME,EMP_DESIGNATION FROM EMPLOYEE WHERE EMP_SAL=45000;
+
+@Result:
+
+	 EMPLOYEE_NAME     EMP_DESIGNATION
+
+		 Mahi           Developer
+         Anju           Team Lead
+		 .
+		 .
+		 .ETC...
+____________________________________________________________________________________________________________________________
+FILTERING ON PARTIAL VALUES WITH LIKE:
+
+7.How to get employee details where name starts with R?
+
+@Query:
+	
+	SELECT * FROM EMPLOYEE WHERE EMPLOYEE_NAME LIKE 'R%';
+	
+@Result:
+	
+	EMPLOYEE_ID   EMPLOYEE_NAME  EMP_SAL	EMP_EMAIL 		   EMP_DESIGNATION
+	
+     103	         Ram	      28000		ram@gmail.com		System Engineer
+	  .
+	  .
+	  .ETC...
+	  
+____________________________________________________________________________________________________________________________
+
+8.How to get employee details where employee name ends with i?
+
+@Query:
+	
+	SELECT * FROM EMPLOYEE WHERE EMPLOYEE_NAME LIKE '%i';
+
+@Result:
+	
+	
+	EMPLOYEE_ID   EMPLOYEE_NAME  EMP_SAL	EMP_EMAIL 		   EMP_DESIGNATION
+	101	              Mahi	      45000 	mahi@gmail.com		Developer
+    102	              Sri	      25000	    sri@gmail.com		Tester
+     .
+	 .
+	 .ETC..
+____________________________________________________________________________________________________________________________
+USING TWO FILTERS:
+
+9.How to get employee details where employee name =Mahi and emp_designation= developer?
+
+@Query:
+	
+	SELECT * FROM EMPLOYEE WHERE EMPLOYEE_NAME='Mahi' AND EMP_DESIGNATION='Developer';
+
+@Result:
+	
+	
+	EMPLOYEE_ID   EMPLOYEE_NAME  EMP_SAL	EMP_EMAIL 		   EMP_DESIGNATION
+	101	              Mahi	      45000 	mahi@gmail.com		Developer
+     .
+	 .
+	 .ETC....
+____________________________________________________________________________________________________________________________
+
+10.How to get employee details where employee name=Mahi or emp_designation=Tester?
+
+@Query:
+	
+	SELECT * FROM EMPLOYEE WHERE EMPLOYEE_NAME='Mahi' OR EMP_DESIGNATION='Tester';
+
+@Result:
+	
+	EMPLOYEE_ID   EMPLOYEE_NAME  EMP_SAL	EMP_EMAIL 		   EMP_DESIGNATION
+	101	              Mahi	      45000 	mahi@gmail.com		Developer
+    102	              Sri	      25000	    sri@gmail.com		Tester
+     .
+	 .
+	 .ETC..
+
+____________________________________________________________________________________________________________________________
+11. How to get employee details where employee salary is not equal to null?
+
+@Query:
+	
+	SELECT * FROM EMPLOYEE WHERE EMP_SAL IS NOT NULL;
+
+@Result:
+	
+	EMPLOYEE_ID   EMPLOYEE_NAME  EMP_SAL	EMP_EMAIL 		   EMP_DESIGNATION
+	101	              Mahi	      45000 	mahi@gmail.com		Developer
+    102	              Sri	      25000	    sri@gmail.com		Tester
+    103	              Ram	      28000		ram@gmail.com		System Engineer
+    104	             Venkat       36000		venkat@gmail.com	Senior System Engineer
+    105         	  Anju	      45000		anju@gmail.com		Team Lead
+      .
+	  .
+	  .ETC...
+________________________________________________________________________________________________________________________________
+
+12.How to get employee details from employee table where employee salary is null?
+
+@Query:
+	
+	SELECT * FROM EMPLOYEE WHERE EMP_SAL IS NULL;
+	
+@Result:
+
+	EMPLOYEE_ID   EMPLOYEE_NAME   EMP_SAL	    EMP_EMAIL 		   EMP_DESIGNATION
+	121	            Lovely		  (null)       lovely@gmail.com	       Developer
+____________________________________________________________________________________________________________________________	
+GETTING UNIQUE RECORDS WITH DISTINCT
+
+13.How to get distinct designation from employee table?
+
+@Query:
+	
+	SELECT DISTINCT EMP_DESIGNATION FROM EMPLOYEE;
+
+@Result:
+
+	  EMP_DESIGNATION
+		Team Lead
+		Tester
+		System Engineer
+		Senior System Engineer
+		Developer
+         .
+		 .ETC....
+____________________________________________________________________________________________________________________________
+
+14.How to get employee details from employee table where EMP_EMAIL is mahi@gmail.com or sri@gmail.com or ram@gmail.com?
+
+@Query:
+	
+	SELECT * FROM EMPLOYEE WHERE EMP_EMAIL IN ('mahi@gmail.com','sri@gmail.com','ram@gmail.com');
+
+@Result:
+	
+	
+	EMPLOYEE_ID   EMPLOYEE_NAME  EMP_SAL	EMP_EMAIL 		   EMP_DESIGNATION
+	101	              Mahi	      45000 	mahi@gmail.com		Developer
+    102	              Sri	      25000	    sri@gmail.com		Tester
+    103	              Ram	      28000		ram@gmail.com		System Engineer
+     .
+	 .
+	 .Etc....
+______________________________________________________________________________________________________________________________________
+
+14. How to get employee details from employee table where EMP_EMAIL NOT equal to mahi@gmail.com or sri@gmail.com or ram@gmail.com?
+
+@Query:
+	
+	SELECT * FROM EMPLOYEE WHERE EMP_EMAIL NOT IN ('mahi@gmail.com','sri@gmail.com','ram@gmail.com');
+
+@Result:
+	
+	EMPLOYEE_ID   EMPLOYEE_NAME   EMP_SAL	EMP_EMAIL 		   EMP_DESIGNATION
+     104	         Venkat       36000		venkat@gmail.com	Senior System Engineer
+     105         	  Anju	      45000		anju@gmail.com		Team Lead
+
+                 .
+				 .
+				 .
+				 .
+				 .ETC.......
+_______________________________________________________________________________________________________________________________________
+
+15.How to get employee details from employee table where EMPLOYEE_ID is >=105 and <=110?
+
+@Query:
+	
+	SELECT * FROM EMPLOYEE WHERE EMPLOYEE_ID BETWEEN 105 AND 110;
+
+@Result:
+	
+	EMPLOYEE_ID   EMPLOYEE_NAME   	EMP_SAL			EMP_EMAIL 		   EMP_DESIGNATION
+	105	       		 Anju			45000		anju@gmail.com			Team Lead
+    106				Janaki			45000		janaki@gmail.com		Developer
+    107				Bhagya			35000		bhagya@gmail.com		Tester
+    108				vijji			28000		vijji@gmail.com			System Engineer
+    109				Vara			36000		vara@gmail.com			Senior System Engineer
+    110				Sravs			45000		sravs@gmail.com			Developer
+____________________________________________________________________________________________________________________________
+16.How to get employee details from employee table which are not >=105 and <=110?
+
+@Query:
+		
+	SELECT * FROM EMPLOYEE WHERE EMPLOYEE_ID NOT BETWEEN 105 AND 110;
+	
+@Result:
+	EMPLOYEE_ID   EMPLOYEE_NAME   	EMP_SAL			EMP_EMAIL 		   EMP_DESIGNATION
+	101			     Mahi		    45000		mahi@gmail.com	         Developer
+	102			     Sri	    	25000		sri@gmail.com				Tester
+	103			     Ram	    	28000	    ram@gmail.com			System Engineer
+	104			    Venkat		    36000	    venkat@gmail.com		Senior System Engineer
+	111			    Bubby		    45000	    bubby@gmail.com				Team Lead
+	112			    Laddu		    20000	    laddu@gmail.com				Tester
+	113			    Honey		    28000	    hon@gmail.com				System Engineer
+	114			    Buuny		    36000	    bun@gmail.com			Senior System Engineer
+	115			    Muffin		    45000	    muffin@gmail.com			Developer
+	116			    Pooh		    45000	    pooh@gmail.com				Developer
+	117			    Teddy		    35000	    teddy@gmail.com				Tester
+      .
+	  .
+	  .ETC.......
+____________________________________________________________________________________________________________________________
+17.How to get employee details from employee table where EMP_SAL>25000 AND EMP_SAL>30000 AND EMP_SAL>40000?
+
+@Query:
+
+	  SELECT * FROM EMPLOYEE WHERE EMP_SAL> ALL(25000,30000,40000);
+	  
+@Result:
+	
+	EMPLOYEE_ID   EMPLOYEE_NAME   	EMP_SAL			EMP_EMAIL 		   EMP_DESIGNATION
+	   101			Mahi			45000			mahi@gmail.com			Developer
+       105			Anju			45000			anju@gmail.com			Team Lead
+       106			Janaki			45000			janaki@gmail.com		Developer
+       110			Sravs			45000			sravs@gmail.com			Developer
+
+____________________________________________________________________________________________________________________________
+
+18.How to get employee details from employee table where EMP_SAL>25000 OR EMP_SAL>30000 OR EMP_SAL>40000?
+
+@Query:
+	
+	SELECT * FROM EMPLOYEE WHERE EMP_SAL> ANY (25000,30000,40000);
+	
+@Result:
+	EMPLOYEE_ID   EMPLOYEE_NAME   	EMP_SAL			EMP_EMAIL 		   EMP_DESIGNATION
+	  101	         Mahi	         45000	       mahi@gmail.com	     Developer
+      103	         Ram	         28000	       ram@gmail.com	   System Engineer
+      104	        Venkat	         36000	       venkat@gmail.com	   Senior System Engineer
+      105	         Anju	         45000	       anju@gmail.com	      Team Lead
+      106	        Janaki	         45000	       janaki@gmail.com	      Developer
+      107	        Bhagya	         35000	       bhagya@gmail.com	       Tester
+      108	        vijji	         28000	       vijji@gmail.com	      System Engineer
+____________________________________________________________________________________________________________________________
+SORTING RESULTS WITH THE BY ORDER BY CLAUSE
+
+19.How to get EMPLOYEE_NAME in alphabetical order?
+
+@Query:
+	
+	SELECT * FROM EMPLOYEE
+	  ORDER BY EMPLOYEE_NAME ASC;
+	
+@Result:
+
+EMPLOYEE_ID   EMPLOYEE_NAME   	EMP_SAL			EMP_EMAIL 		   EMP_DESIGNATION
+	105       	Anju	        45000	     anju@gmail.com	        Team Lead
+    107	       Bhagya	        35000	     bhagya@gmail.com	     Tester
+    111     	Bubby	        45000	     bubby@gmail.com	    Team Lead
+    114     	Buuny	        36000	     bun@gmail.com	     Senior System Engineer
+    118	       Harsha	        28000	     harsha@gmail.com	   System Engineer
+____________________________________________________________________________________________________________________________
+
+20.How to get EMPLOYEE_NAME in ascending order and EMP_DESIGNATION IN descending order?
+
+@Query:
+	
+	SELECT * FROM EMPLOYEE
+	  ORDER BY EMPLOYEE_NAME ASC,
+	  EMP_DESIGNATION DESC;
+
+@Result:
+	
+	EMPLOYEE_ID   EMPLOYEE_NAME   	EMP_SAL			EMP_EMAIL 		   EMP_DESIGNATION
+	105	            Anju	         45000	     anju@gmail.com	         Team Lead
+    107	           Bhagya	         35000	     bhagya@gmail.com	      Tester
+    111	           Bubby	         45000	     bubby@gmail.com	     Team Lead
+    114	           Buuny	         36000	     bun@gmail.com	     Senior System Engineer
+    118	           Harsha	         28000	     harsha@gmail.com	    System Engineer
+____________________________________________________________________________________________________________________________
+	
+21.How to get union of EMPLOYEE AND CUSTOMER tables by removing duplicates?
+
+@Query:
+	
+	SELECT EMPLOYEE_ID FROM EMPLOYEE
+	UNION
+	SELECT CUSTOMER_ID FROM CUSTOMER;
+
+@Result:
+	
+	EMPLOYEE_ID
+	 101
+	 102
+	 103
+	  .
+	  .
+	  .ETC....
+____________________________________________________________________________________________________________________________
+
+22.How to get union of EMPLOYEE AND CUSTOMER tables without removing duplicates?
+
+@Query:
+	
+	SELECT EMPLOYEE_ID FROM EMPLOYEE
+	UNION ALL
+	SELECT CUSTOMER_ID FROM CUSTOMER;
+	
+@Result:
+	EMPLOYEE_ID
+	 101
+     102
+     103
+     104
+     101
+     102
+     103
+     104
+	 105
+	 .
+	 .ETC...
+____________________________________________________________________________________________________________________________
+
+23.How to get common records from employee and customer tables?
+
+@Query:
+	
+	SELECT EMPLOYEE_ID FROM EMPLOYEE
+	INTERSECT
+	SELECT CUSTOMER_ID FROM CUSTOMER;
+
+@Result:
+	
+	EMPLOYEE_ID
+	  101
+	  102
+	  103
+	  104
+	  .
+	  .ETC...
+____________________________________________________________________________________________________________________________
+
+24.How to get the records from first table which are not common with second table?
+
+@Query:
+	
+	SELECT EMPLOYEE_NAME FROM EMPLOYEE
+	MINUS
+	SELECT CUSTOMER_NAME FROM CUSTOMER;
+
+@Result:
+	
+	EMPLOYEE_NAME
+	 Anju
+	 Bhagya
+	 Bubby
+	 Buuny
+	 Harsha
+	 Honey
+____________________________________________________________________________________________________________________________
+25.How to get count of records present in EMPLOYEE TABLE?
+
+@Query:
+	
+	SELECT COUNT(*) FROM EMPLOYEE;
+	
+@Result:
+	
+	COUNT(*)
+	  21
+____________________________________________________________________________________________________________________________
+
+26.How to get distinct designation count from EMPLOYEE TABLE?
+
+@Query:
+	
+	SELECT COUNT(DISTINCT EMP_DESIGNATION) FROM EMPLOYEE;
+	
+@Result:
+	
+	COUNT(DISTINCT EMP_DESIGNATION)
+	       5
+____________________________________________________________________________________________________________________________
+
+27.How to count no of employees based on designation?
+
+@Query:
+	
+	SELECT EMP_DESIGNATION,COUNT(*)
+	FROM EMPLOYEE
+	GROUP BY EMP_DESIGNATION;
+	
+@Result:
+
+	 EMP_DESIGNATION  COUNT(*)
+	    Team Lead	    2
+        Tester	        4
+     System Engineer	4
+Senior System Engineer	4
+        Developer	    7
+ ____________________________________________________________________________________________________________________________
+
+28.How to get count of employees based on emp_designation and descending order based on count?
+
+@Query:
+	
+	SELECT EMP_DESIGNATION,COUNT(*)
+	FROM EMPLOYEE
+	GROUP BY EMP_DESIGNATION
+	ORDER BY COUNT(*) DESC;
+
+@Result:
+	EMP_DESIGNATION     COUNT(*)
+	  Developer	          7
+       Tester	          4
+   System Engineer	      4
+Senior System Engineer	  4
+     Team Lead	          2
+____________________________________________________________________________________________________________________________
+
+29.How to get EMP_DESIGNATION, COUNT of each designation from employee table which are having count > 2?
+
+@Query:
+	
+	SELECT EMP_DESIGNATION,COUNT(*)
+	FROM EMPLOYEE
+	GROUP BY EMP_DESIGNATION
+	HAVING COUNT(*)>2;
+	
+@Result:
+	
+	EMP_DESIGNATION     COUNT(*)
+	   Tester	          4
+    System Engineer	      4
+Senior System Engineer	  4
+      Developer	          7
+
+____________________________________________________________________________________________________________________________
+
+30.How to get total salary which was paid to all employees?
+
+@Query:
+	
+	SELECT SUM(EMP_SAL) FROM EMPLOYEE;
+
+@Result:
+	
+	SUM(EMP_SAL)
+	 731000
+______________________________________________________________________________________________________________________
+
+31.How to get maximum salary from employee table?
+
+@Query:
+	
+	SELECT MAX(EMP_SAL) FROM EMPLOYEE;
+	
+@Result:
+    
+	MAX(EMP_SAL)
+	  45000
+____________________________________________________________________________________________________________________________
+32.How to get minimum salary from the employee table?
+
+@Query:
+	
+	SELECT MIN(EMP_SAL) FROM EMPLOYEE;
+
+@Result:
+	
+	MIN(EMP_SAL)
+	20000
+____________________________________________________________________________________________________________________________
+33.How to get average salary from employee table?
+
+@Query:
+	
+	SELECT AVG(EMP_SAL) FROM EMPLOYEE;
+
+@Result:
+    
+	AVG(EMP_SAL)
+     36550
+____________________________________________________________________________________________________________________________
+34.How to second maximum salary from employee table?
+
+@Query:
+	
+	SELECT MAX(EMP_SAL) AS SECOND_MAX FROM EMPLOYEE
+	WHERE EMP_SAL NOT IN(SELECT  MAX(EMP_SAL) 
+	FROM EMPLOYEE);
+
+@Result:
+	
+	SECOND_MAX
+	 36000
+________________________________________________________________________________________________________________________________
+35.How to second minimum salary from employee table?
+
+@Query:
+	
+	SELECT MIN(EMP_SAL) AS SECOND_MIN FROM EMPLOYEE
+	WHERE EMP_SAL NOT IN(SELECT  MIN(EMP_SAL) 
+	FROM EMPLOYEE);
+
+@Result:
+	
+	SECOND_MIN 
+	 25000
+____________________________________________________________________________________________________________________________
+36.How to get Monthly salary from employee table?
+
+@Query:
+
+	SELECT EMPLOYEE_ID,
+	   EMPLOYEE_NAME,
+	   e.EMP_SAL AS ANNUAL_SALARY,
+	   e.EMP_SAL/12 AS MONTHLY_SALARY
+       FROM EMPLOYEE e;
+
+@Result:
+	
+	EMPLOYEE_ID   EMPLOYEE_NAME   ANNUAL_SALARY    MONTHLY_SALARY
+	
+	  101	          Mahi	        45000	         3750
+      102	          Sri	        25000	        2083.333333333333333333333333333333333333
+      103	          Ram	        28000	        2333.333333333333333333333333333333333333
+      104	          Venkat	    36000	          3000
+____________________________________________________________________________________________________________________________
+37.How to get rounded value of monthly salary in EMPLOYEE table?
+
+@Query:
+	
+	SELECT EMPLOYEE_ID,
+	    EMPLOYEE_NAME,
+		E.EMP_SAL AS ANNUAL_SALARY,
+		ROUND(E.EMP_SAL/12) AS MONTHLY_SALARY
+		FROM EMPLOYEE E;
+@Result:
+	
+	EMPLOYEE_ID   EMPLOYEE_NAME   ANNUAL_SALARY    MONTHLY_SALARY
+	
+	  101	          Mahi	        45000	         3750
+      102	          Sri	        25000	         2083
+      103	          Ram	        28000	         2333
+      104	          Venkat	    36000	         3000
+______________________________________________________________________________________________________________________
+37.How to get CEIL value of monthly salary in EMPLOYEE table?
+
+@Query:
+	
+	SELECT EMPLOYEE_ID,
+	   EMPLOYEE_NAME,
+	   e.EMP_SAL AS ANNUAL_SALARY,
+	   CEIL(e.EMP_SAL/12) AS MONTHLY_SALARY
+       FROM EMPLOYEE e;
+
+@Result:
+	
+	EMPLOYEE_ID   EMPLOYEE_NAME   ANNUAL_SALARY    MONTHLY_SALARY
+	101           	Mahi	        45000	            3750
+	102				Sri				25000				2084
+	103				Ram				28000				2334
+	104				Venkat			36000				3000
+______________________________________________________________________________________________________________________
+38.How to get CEIL value of monthly salary in EMPLOYEE table?
+
+@Query:
+	
+	SELECT EMPLOYEE_ID,
+	   EMPLOYEE_NAME,
+	   e.EMP_SAL AS ANNUAL_SALARY,
+	   FLOOR(e.EMP_SAL/12) AS MONTHLY_SALARY
+       FROM EMPLOYEE e;
+
+@Result:
+	
+	EMPLOYEE_ID   EMPLOYEE_NAME   ANNUAL_SALARY    MONTHLY_SALARY
+	101           	Mahi	        45000	            3750
+	102				Sri				25000				2083
+	103				Ram				28000				2333
+	104				Venkat			36000				3000
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

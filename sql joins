@@ -1,0 +1,332 @@
+39.how to get commmon records which are present in two different table?
+
+@Query:
+	
+	
+    SELECT EMP_ID,FIRST_NAME,
+	LAST_NAME,
+	EMPLOYEE1.DEPARTMENT_ID 
+	FROM EMPLOYEE1
+    INNER JOIN
+    DEPARTMENT ON EMPLOYEE1.DEPARTMENT_ID=DEPARTMENT.DEPARTMENT_ID;
+
+@Result:
+
+	EMP_ID   FIRST_NAME        LAST_NAME   DEPARTMENT_ID
+	101			Sri				Lakshmi			1
+	102	       	Siva			Kumari			1
+	103			Sneha			Bhavani			2
+	104			Vara			Lakshmi			2
+	105			Mounika			Priya			3
+	106			Sai				Lakshmi			3
+     .
+	 .
+	 .
+	 ETC...
+______________________________________________________________________________________________________________________
+
+40.How to get data from first table including which are common with second table where EMP_SAL>40000?
+
+@Query:
+	
+	SELECT EMP_ID,
+		FIRST_NAME,
+		LAST_NAME,
+		e.DEPARTMENT_ID 
+		FROM EMPLOYEE1 e
+		LEFT OUTER JOIN
+		DEPARTMENT d ON e.DEPARTMENT_ID=d.DEPARTMENT_ID 
+		WHERE e.EMP_SALARY>40000;
+
+
+@Result:
+	EMP_ID       FIRST_NAME    LAST_NAME      DEPARTMENT_ID
+	104			   Vara		    Lakshmi			2
+	105			   Mounika	    Priya			3
+	108				Sri			Lakshmi			4						
+______________________________________________________________________________________________________________________
+
+41.How to get data from SECOND table including which are common with FIRST table where EMP_SAL>40000?
+
+@Query:
+	
+	SELECT EMP_ID,
+		FIRST_NAME,
+		LAST_NAME,
+		e.DEPARTMENT_ID 
+		FROM EMPLOYEE1 e
+	    RIGHT OUTER JOIN
+		DEPARTMENT d ON e.DEPARTMENT_ID=d.DEPARTMENT_ID 
+		WHERE e.EMP_SALARY>40000;
+
+
+@Result:
+	EMP_ID       FIRST_NAME    LAST_NAME      DEPARTMENT_ID
+	104			   Vara		    Lakshmi			2
+	105			   Mounika	    Priya			3
+	108				Sri			Lakshmi			4		
+
+______________________________________________________________________________________________________________________
+
+
+41.How to get data from SECOND table including which are common with FIRST table where EMP_SAL>40000?
+
+@Query:
+	
+	SELECT EMP_ID,
+		E.FIRST_NAME,
+		E.LAST_NAME,
+		D.DEPARTMENT_ID,
+		D.DEPARTMENT_NAME FROM EMPLOYEE1 e
+        RIGHT JOIN
+        DEPARTMENT d ON e.DEPARTMENT_ID=d.DEPARTMENT_ID 
+        WHERE e.EMP_SALARY>40000;
+
+@Result:
+	EMP_ID       FIRST_NAME    LAST_NAME      DEPARTMENT_ID    DEPARTMENT_NAME
+	104			   Vara		    Lakshmi			2                SALES
+	105			   Mounika	    Priya			3               ACCOUNTING
+	108				Sri			Lakshmi			4		        ADMINISTRATION
+															
+__________________________________________________________________________________________________________________________
+
+42.How to data from two tables which are not common?
+
+@Query:
+	
+	SELECT EMP_ID,
+		FIRST_NAME,
+		LAST_NAME,
+		e.DEPARTMENT_ID FROM EMPLOYEE1 e
+        FULL JOIN
+        DEPARTMENT d ON e.DEPARTMENT_ID=d.DEPARTMENT_ID 
+        WHERE e.EMP_SALARY>40000;
+@Result:
+	
+	EMP_ID       FIRST_NAME    LAST_NAME      DEPARTMENT_ID
+	104			   Vara		    Lakshmi			2
+	105			   Mounika	    Priya			3
+	108				Sri			Lakshmi			4		
+______________________________________________________________________________________________________________________________
+
+43.How to implement CROSS JOIN?
+    It will give cartesian product of that table
+	   suppose if there are 20 records in first table 
+	       and if there are 50 records in second table 
+		      then it will give result of (20*50)  records as output.
+
+@Query:
+	
+	SELECT EMP_ID,
+		FIRST_NAME,
+		LAST_NAME FROM EMPLOYEE
+		CROSS JOIN DEPARTMENT;
+		
+@Result:
+	
+	EMP_ID		FIRST_NAME		LAST_NAME
+	101	           Sri	         Lakshmi
+	102			  Siva			 Kumari
+    103	          Sneha	         Bhavani
+    104	          Vara	         Lakshmi
+    105	        Mounika	         Priya
+    106           Sai	         Lakshmi
+    107	         Siri	         Vennala
+    108	          Sri	         Lakshmi
+    101	          Sri	         Lakshmi
+    102	          Siva	         Kumari
+    103	          Sneha	         Bhavani
+__________________________________________________________________________________________________________________________________
+44.How to wheather the email contains '@' and if it contains return the position of that?
+
+@Query:
+	
+	SELECT EMPLOYEE_ID,
+		EMPLOYEE_NAME,
+		EMP_EMAIL,
+		INSTR(EMP_EMAIL,'@')
+		FROM EMPLOYEE;
+		
+@Result:
+	EMPLOYEE_ID  EMPLOYEE_NAME    EMP_EMAIL           INSTR(EMP_EMAIL,'@')
+	101	             Mahi	     mahi@gmail.com	              5
+    102	             Sri	     sri@gmail.com	              4
+    103          	 Ram	     ram@gmail.com	              4
+    104	            Venkat	     venkat@gmail.com	          7
+______________________________________________________________________________________________________________________
+
+45.How to get length of email?
+
+@Query:
+	
+	SELECT EMPLOYEE_ID,
+		EMPLOYEE_NAME,
+		EMP_EMAIL,
+		LENGTH(EMP_EMAIL)
+		FROM EMPLOYEE;
+
+@Result:
+	
+	EMPLOYEE_ID  EMPLOYEE_NAME    EMP_EMAIL           LENGTH(EMP_EMAIL)
+	101	             Mahi	     mahi@gmail.com	              14
+    102	             Sri	     sri@gmail.com	              13
+    103          	 Ram	     ram@gmail.com	              13
+    104	            Venkat	     venkat@gmail.com	          16
+______________________________________________________________________________________________________________________
+46.How to find the domain of the email in employee table?
+
+@Query:
+	
+	SELECT EMPLOYEE_ID,
+		EMPLOYEE_NAME,
+		EMP_EMAIL,
+		INSTR(EMP_EMAIL,'@'),
+		SUBSTR(EMP_EMAIL, 
+		INSTR(EMP_EMAIL,'@')+1,
+		LENGTH(EMP_EMAIL)) ASEMAIL_DOMAIN
+		FROM EMPLOYEE;
+
+@Result:
+	
+	EMPLOYEE_ID  EMPLOYEE_NAME    EMP_EMAIL           INSTR(EMP_EMAIL,'@')      EMAIL_DOMAIN
+	101	             Mahi	     mahi@gmail.com	             5                   gmail.com
+    102	             Sri	     sri@gmail.com	             4                   gmail.com
+    103          	 Ram	     ram@gmail.com	             4	                 gmail.com
+	104             Venkat	     venkat@gmail.com	         7                   gmail.com
+________________________________________________________________________________________________________________________
+47.How to use CASE statement for PRICE wheather the PRICE is above 1000 or 2000?
+
+Query:
+	
+	SELECT PRODUCT_ID,PRODUCT_NAME,PRICE,
+		CASE
+		WHEN PRICE>1000 THEN 'OVER 1000'
+		WHEN PRICE>2000 THEN 'OVER 2000'
+		ELSE 'UNKNOWN'
+		END PRICE_GROUP
+		FROM PRODUCT;
+
+@Result:
+	PRODUCT_ID  PRODUCT_NAME   PRICE   PRICE_GROUP
+	90				Bottle		2000	OVER 1000
+	90				Bottle		2000	OVER 1000
+	91				cups		2000	OVER 1000
+	92				comb		2000	OVER 1000
+	93				laptop		2000	OVER 1000
+	94				mobile		2000	OVER 1000
+	95				watch		2000	OVER 1000
+________________________________________________________________________________________________________________________
+48.How to write a query for getting salary which is > avg(salary)?
+
+@Query:
+	
+	SELECT EMPLOYEE_ID,EMPLOYEE_NAME,EMP_SAL FROM EMPLOYEE WHERE EMP_SAL>(SELECT AVG(EMP_SAL) FROM EMPLOYEE);
+
+@Result:
+	
+	EMPLOYEE_ID    EMPLOYEE_NAME   EMP_SAL
+	101	             Mahi	         45000
+    105	             Anju	         45000
+    106	            Janaki	         45000
+    110         	Sravs	         45000
+    111	            Bubby	         45000
+
+________________________________________________________________________________________________________________________
+49.How to update the particualr EMP_SAL based on EMPLOYEE_ID=101?
+
+@Query:
+	UPDATE EMPLOYEE 
+       SET EMP_SAL=EMP_SAL+10000
+       WHERE EMPLOYEE_ID=101;
+
+@Result:
+	
+	1 row updated.
+
+TO CHECK WHEATHER THE SALARY UPDATED OR NOT
+
+@Query:
+	
+	SELECT EMP_SAL FROM EMPLOYEE WHERE EMPLOYEE_ID=101;
+	
+@Result:
+	
+	EMP_SAL
+	
+	55000
+______________________________________________________________________________________________________________________
+50. How to delete the record based on the given EMPLOYEE_ID from EMPLOYEE table?
+
+@Query:
+	
+	DELETE FROM EMPLOYEE	
+		WHERE EMPLOYEE_ID=103;
+	
+@Result:
+	
+	1 row deleted.
+	
+TO CHECK WHEATHERIT IS DELETED OR NOT
+	
+@Query:
+    
+	SELECT * FROM EMPLOYEE WHERE EMPLOYEE_ID=103;
+
+@Result:
+	
+	EMPLOYEE_ID   EMPLOYEE_NAME   	EMP_SAL			EMP_EMAIL 		   EMP_DESIGNATION
+	
+________________________________________________________________________________________________________________________
+51.How delete the data without deleting the structure of the table?
+
+@query:
+	
+	TRUNCATE TABLE PRODUCT;
+@Result:
+	
+	Table PRODUCT truncated.
+	
+CHECK WHEATHER THE STRUCTURE IS THERE OR NOT THERE
+
+@query:
+	
+	SELECT * FROM PRODUCT;
+
+@Result:
+	
+	PRODUCT_ID   PRODUCT_NAME   PRICE  DEPARTMENT_ID
+	
+	
+________________________________________________________________________________________________________________________	
+52. How to delete complete structure of the table?	
+	
+@Query:
+   
+   DROP TABLE DEPARTMENT;
+	
+@Result:
+	
+	Table DEPARTMENT dropped.
+______________________________________________________________________________________________________________________
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+
+
+
+
